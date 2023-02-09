@@ -1,7 +1,7 @@
 # MeltMushRxn
 Matlab codes use to simulate the chemical and mineralogical influence of melt-mush reaction in magmatic systems.
 
-The code presented in this repository is used to simulate the chemical, minearlogical and thermal consequences of melt-mush reaction and reactive flow in mafic crystal mush systems. The code is used in Gleeson et al. (in review) 'Porosity evolution of mafic crystal mush during reactive flow' - submitted to Nature Communications - to generate all figures and results.
+The code presented in this repository is used to simulate the chemical, mineralogical and thermal consequences of melt-mush reaction and reactive flow in mafic crystal mush systems. The code is used in Gleeson et al. (in review) 'Porosity evolution of mafic crystal mush during reactive flow' - submitted to Nature Communications - to generate all figures and results.
 
 Several different MATLAB scripts and/or packages are presented in this repository and summarised below:
 
