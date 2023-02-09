@@ -1,0 +1,59 @@
+function [MeltMushTables]=CreateTables(len)
+%% Create tables to be filled in melt-mush reaction calculations.
+% This code takes the proposed length of the calculation (i.e., the number
+% of melt mush reaction cycles to be simulated).
+% Input: length (integer)
+% Output: MeltMushTables - Struct
+%       Contains tables for the Conditions, Liquid Mass, Reacted Mass,
+%       Reacted Mass Initial, Unreacted Mass, Reacted Composition, Reacted
+%       Composition Initial and Unreacted Composition.
+
+    % Create a table to store the model P-T conditions.
+    N={'P','T','H'};
+    Conditions=table(zeros(len+1,1),zeros(len+1,1),zeros(len+1,1));
+    Conditions.Properties.VariableNames=N;
+
+    % Define names of all possible phases in the MELTS models
+    Names={'liquid1','fluid1','olivine1','olivine2','clinopyroxene1',...
+        'clinopyroxene2','plagioclase1','plagioclase2',...
+        'spinel1','spinel2','orthopyroxene1','orthopyroxene2',...
+        'kfeldspar1','kfeldspar2','apatite1','rhmoxide1',...
+        'quartz1','biotite1','whitlockite1'};
+
+    % define the mass of all possible phases
+    React_Mass=table(zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),...
+        zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),...
+        zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),...
+        zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),...
+        zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),zeros(len+1,1));
+    React_Mass.Properties.VariableNames=Names;
+    React_Mass_In=React_Mass;
+    Unreact_Mass=React_Mass;
+    Liq_Mass=table(zeros(len+1,1));
+    Liq_Mass.Properties.VariableNames=Names(1);
+
+    % define elements that are involved in the melts calculations
+    Elements={'SiO2','TiO2','Al2O3','Fe2O3','Cr2O3','FeO','MnO','MgO',...
+        'NiO','CoO','CaO','Na2O','K2O','P2O5','H2O','CO2','SO2','Cl','F'};
+
+    % create a dummy table for the composition of a hypothetical phase
+    Bulk_Composition=table(zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),...
+        zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),...
+        zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),...
+        zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),...
+        zeros(len+1,1),zeros(len+1,1),zeros(len+1,1),zeros(len+1,1));
+    Bulk_Composition.Properties.VariableNames=Elements;
+
+    % define composition tables
+    React_Composition=table(Bulk_Composition,Bulk_Composition,Bulk_Composition,Bulk_Composition,...
+        Bulk_Composition,Bulk_Composition,Bulk_Composition,Bulk_Composition,Bulk_Composition,...
+        Bulk_Composition,Bulk_Composition,Bulk_Composition,Bulk_Composition,Bulk_Composition,...
+        Bulk_Composition,Bulk_Composition,Bulk_Composition,Bulk_Composition,Bulk_Composition);
+    React_Composition.Properties.VariableNames=Names;
+    React_Composition_In=React_Composition;
+    Unreact_Composition=React_Composition;
+
+    MeltMushTables=struct('Conditions', Conditions, 'Liq_Mass', Liq_Mass, 'React_Mass', React_Mass,...
+        'React_Mass_In', React_Mass_In, 'Unreact_Mass', Unreact_Mass, 'React_Composition', React_Composition, ...
+        'React_Composition_In', React_Composition_In, 'Unreact_Composition', Unreact_Composition);
+end
