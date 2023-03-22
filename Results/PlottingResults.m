@@ -712,7 +712,7 @@ histogram(S3.Cc,15, 'FaceColor', 'red', 'FaceAlpha', 0.6)
 xlabel('X_{Clinopyroxene}^{Cryst}', 'FontSize', 16)
 
 %% Melt flux calculations
-n = 27.39; %Pa S - calculated using the model of Giordano et al. 2008 using the melt composition from the MELTS FC model at 1180oC
+n = 27.39; %Pa S - calculated using the model of Giordano et al. 2008 using the melt composition from the MELTS FC model at 1180oC. These calculations were performed in the python3 package Thermobar, but could also be done using alphaMELTS for MATLAB.
 p_mush = 3288.9*0.05 + 2661.1*0.55 + 3223.1*0.40; % Ol, Plg, Cpx density and modal abundance in mush
 p_melt = 2665.4; % kg/m3 from MELTS model at 1180 oC
 g = 9.81; % Gravitational acceleration m/s2
